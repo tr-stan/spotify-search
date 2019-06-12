@@ -1,0 +1,28 @@
+{
+  "name": "spotify-search",
+  "version": "1.0.0",
+  "description": "A server-side app for submitting requests to Spotify's web API for searching artists and tracks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'merhabalar'"
+  },
+  "keywords": [
+    "spotify",
+    "music",
+    "search",
+    "track",
+    "artist",
+    "node",
+    "client-credentials",
+    "oauth"
+  ],
+  "author": "Tristan Bennett",
+  "license": "ISC",
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "limiting-middleware": "^1.3.2",
+    "request": "^2.88.0"
+  }
+}
