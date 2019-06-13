@@ -10,7 +10,7 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const PORT = process.env.PORT || 9000;
 
 const AUTHORIZATION_HEADER = base64.encode(`${CLIENT_ID}:${CLIENT_SECRET}`);
-const BASE_URL = 'https://api.spotify.com/v1/search';
+const BASE_URL = 'https://api.spotify.com/v1/';
 const REFRESH_RATE = 59000 * 60;
 
 // use cors middleware to allow requests from other servers/sites e.g. frontend application
@@ -22,22 +22,22 @@ let accessToken = ''
 
 function requestToken() {
     axios({
-            url: '/token',
-            method: 'post',
-            baseURL: 'https://accounts.spotify.com/api/',
-            auth: {
-                username: CLIENT_ID,
-                password: CLIENT_SECRET
-            },
-            params: { grant_type: "client_credentials" }
-        })
-        .then(response => {
-            accessToken = response.data.access_token;
-            console.log(response.data);
-        })
-        .catch(error => {
-            console.log('There was an error: ', error.message);
-        })
+        url: '/token',
+        method: 'post',
+        baseURL: 'https://accounts.spotify.com/api/',
+        auth: {
+            username: CLIENT_ID,
+            password: CLIENT_SECRET
+        },
+        params: { grant_type: "client_credentials" }
+    })
+    .then(response => {
+        accessToken = response.data.access_token;
+        console.log(response.data);
+    })
+    .catch(error => {
+        console.log('There was an error: ', error.message);
+    })
 }
 requestToken();
 
@@ -46,6 +46,27 @@ setInterval(() => requestToken(), REFRESH_RATE)
 app.get('/', (request, response) => {
     response.send('At your disposal. Try /artist/:name to search for an artist');
 });
+
+app.get('/artists/:name', (request, response, next) => {
+	let name = request.params.name;
+	axios({
+		url: `/search`,
+		headers: { 'Authorization': `Bearer ${accessToken}`},
+		baseURL: BASE_URL,
+		params: {
+			q: name,
+			type: "artist",
+			limit: "3"
+		}
+	})
+	.then(results => {
+		console.log(results.data);
+		response.send(results.data);
+	})
+	.catch(error => {
+		console.log("There was an error fetching the artists", error);
+	})
+})
 
 // super basic error handling middleware
 app.use((error, req, res, next) => {
