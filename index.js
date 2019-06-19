@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 9000;
 
 const AUTHORIZATION_HEADER = base64.encode(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const BASE_URL = 'https://api.spotify.com/v1/';
-const REFRESH_RATE = 59000 * 60;
+const REFRESH_RATE = 59000 * 60; // 59 minutes
 
 // use cors middleware to allow requests from other servers/sites e.g. frontend application
 app.use(cors());
@@ -25,6 +25,7 @@ function requestToken() {
         url: '/token',
         method: 'post',
         baseURL: 'https://accounts.spotify.com/api/',
+        // the `auth` option is used for the BASIC auth header, but not for BEARER
         auth: {
             username: CLIENT_ID,
             password: CLIENT_SECRET
@@ -55,8 +56,69 @@ app.get('/artists/:name', (request, response, next) => {
 		baseURL: BASE_URL,
 		params: {
 			q: name,
-			type: "artist",
-			limit: "3"
+			type: 'artist',
+			limit: "10"
+		}
+	})
+	.then(results => {
+		console.log(results.data);
+		response.send(results.data.artists);
+	})
+	.catch(error => {
+		console.log("There was an error fetching the artists", error);
+	})
+})
+
+app.get('/artists/:id/top-tracks', (request, response, next) => {
+	let id = request.params.id;
+	axios({
+		url: `/artists/${id}/top-tracks`,
+		headers: { 'Authorization': `Bearer ${accessToken}`},
+		baseURL: BASE_URL,
+		params: {
+			country: 'US'
+		}
+	})
+	.then(results => {
+		console.log(results.data);
+		response.send(results.data);
+	})
+	.catch(error => {
+		console.log("There was an error fetching the artists", error);
+	})
+})
+
+app.get('/tracks/:name', (request, response, next) => {
+	let name = request.params.name;
+	axios({
+		url: `/search`,
+		headers: { 'Authorization': `Bearer ${accessToken}`},
+		baseURL: BASE_URL,
+		params: {
+			q: name,
+			type: 'track',
+			limit: "10"
+		}
+	})
+	.then(results => {
+		console.log(results.data);
+		response.send(results.data);
+	})
+	.catch(error => {
+		console.log("There was an error fetching the artists", error);
+	})
+})
+
+app.get('/any/:name', (request, response, next) => {
+	let name = request.params.name;
+	axios({
+		url: `/search`,
+		headers: { 'Authorization': `Bearer ${accessToken}`},
+		baseURL: BASE_URL,
+		params: {
+			q: name,
+			type: 'track,artist,album',
+			limit: "10"
 		}
 	})
 	.then(results => {
