@@ -1,5 +1,6 @@
 require('dotenv').config();
 const app = require('express')();
+const path = require('path');
 const axios = require('axios');
 const cors = require('cors');
 const base64 = require('base-64');
@@ -15,7 +16,7 @@ const REFRESH_RATE = 59000 * 60; // 59 minutes
 
 // use cors middleware to allow requests from other servers/sites e.g. frontend application
 app.use(cors());
-// middleware for rate limiting with each request
+// middleware for rate limiting with each request, courtesy of Daniel Katz
 app.use(new LimitingMiddleware().limitByIp());
 
 let accessToken = ''
@@ -33,6 +34,7 @@ function requestToken() {
         params: { grant_type: "client_credentials" }
     })
     .then(response => {
+    	// setting access token globally for use in all calls to Spotify's Web API
         accessToken = response.data.access_token;
         console.log(response.data);
     })
@@ -45,7 +47,8 @@ requestToken();
 setInterval(() => requestToken(), REFRESH_RATE)
 
 app.get('/', (request, response) => {
-    response.send('At your disposal. Try /artist/:name to search for an artist');
+	response.sendFile(path.join(__dirname + '/index.html'));
+    // response.send('At your disposal. Try /artist/:name to search for an artist');
 });
 
 app.get('/artists/:name', (request, response, next) => {
@@ -61,7 +64,7 @@ app.get('/artists/:name', (request, response, next) => {
 		}
 	})
 	.then(results => {
-		console.log(results.data);
+		console.log("Artist results:", results.data);
 		response.send(results.data.artists);
 	})
 	.catch(error => {
@@ -101,7 +104,7 @@ app.get('/tracks/:name', (request, response, next) => {
 		}
 	})
 	.then(results => {
-		console.log(results.data);
+		console.log("Track results:", results.data);
 		response.send(results.data);
 	})
 	.catch(error => {

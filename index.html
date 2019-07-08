@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spotify Search</title>
+    <style>
+    	@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,700&display=swap');
+    	body {
+    		margin: 0 auto;
+    		padding: 5vh 5vw;
+    		color: rgb(25, 20, 20);
+    		font-family: 'Space Mono', monospace;
+    	}
+
+    	h1 {
+    		color: rgb(30, 215, 96);
+    		background-color: rgb(25, 20, 20);
+    		padding: 1vh 2vw;
+    		border-radius: 5px;
+   		 }
+
+   		 h2, h3 {
+   		 	display: inline-block;
+   		 	color: rgba(30, 215, 96, 0.8);
+    		background-color: rgb(25, 20, 20);
+    		padding: 5px 1vw;
+    		border-radius: 5px;
+   		 }
+
+   		p {
+   			line-height: 40px;
+   		}   		
+
+   		li {
+   			list-style-type: none;
+   			margin: 20px;
+   		}
+
+    	strong {
+    		background-color: rgba(30, 215, 96, 0.3);
+    		margin: 10px;
+    		padding: 5px 10px;
+    		border-radius: 10px;
+    	}
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Spotify Search</h1>
+        <p>You can use this API to search for tracks, artists, and artists' top 10 songs via Spotify's Web API. The data you receive will be in JSON format.</p>
+    </header>
+    <section id="setup">
+        <h2>How to set up the API</h2>
+        <p>You can clone this repository to your local device by opening up your terminal and typing the commands:</p>
+        <ul>
+            <li><strong>npm install</strong></li>
+            <li><strong>git clone https://github.com/tr-stan/spotify-search.git</strong></li>
+        </ul>
+        <p>Then you will need to create a dotenv (<strong>.env</strong>) file:</p>
+        <ul>
+            <li><strong>touch .env</strong></li>
+        </ul>
+        <p>In this <strong>.env</strong> file, you will need to declare three environment variables. As you will see in the <strong>index.js</strong> file, there are three variables defined starting with <strong>process.env</strong>. Those you will need to define in your <strong>.env</strong> file such as:</p>
+        <ul>
+            <li><strong>CLIENT_ID=AbCd1234Efg90xYZ</strong></li>
+            <li><strong>CLIENT_SECRET=123foUr567eIGht9tEn</strong></li>
+            <li><strong>PORT=4321</strong></li>
+        </ul>
+        <p>( Don't forget to add your <strong>.env</strong> file to youre <strong>.gitignore</strong> file: <strong>echo .env >> .gitignore</strong>)</p>
+        <p>In order to get the <strong>CLIENT_ID</strong> and <strong>CLIENT_SECRET</strong> data, you will need to <a href="https://developer.spotify.com/dashboard/login">login to Spotify's developer site</a> and register a new app. It's a quick and easy process, so please don't be deterred by this step!</p>
+        <p>If you need any help figuring out how to register/set up your app, you can <a href="https://developer.spotify.com/documentation/general/guides/app-settings/">see Spotify's App Setting Guide</a>.</p>
+        <p>Now if you use the command <strong>npm run dev</strong> your server should start up with nodemon at 'http://localhost:9000' or 'http://localhost:' + whatever you made your port in your <strong>.env</strong> file.</p>
+    </section>
+    <section id="usage">
+        <h2>Using the API</h2>
+        <div>
+            <h3>Quick note on your search queries</h3>
+            <p>Please note that your searches must be UTF-8 encoded.</p>
+            <p>You can use the ECMAScript <strong>encodeURI()</strong> built-in object method to encode your search</p>
+            <p>( i.e. <strong>encodeURI("Little Dragon")</strong> => "Little%20Dragon", <strong>encodeURI("Rock With You")</strong> => "Rock%20With%20You" ).</p>
+            <p>I set my port in my <strong>.env</strong> file as <strong>PORT=4321</strong>, so I will be using <strong>http://localhost:4321</strong> as my base URL.</p>
+        </div>
+        <div>
+            <h3>To search for a track</h3>
+            <p>Send a fetch request to <strong>http://localhost:4321/tracks/track%20name</strong></p>
+        </div>
+        <div>
+            <h3>To search for an artist</h3>
+            <p>Send a fetch request to <strong>http://localhost:4321/artists/artist%20name</strong></p>
+        </div>
+        <div>
+            <h3>To search for an artist's top ten tracks</h3>
+            <p>Send a fetch request to <strong>http://localhost:4321/artistID/top-tracks</strong></p>
+        </div>
+    </section>
+</body>
+
+</html>
