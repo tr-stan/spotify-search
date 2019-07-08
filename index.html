@@ -91,17 +91,24 @@
         </div>
         <div>
             <h3>To search for a track</h3>
-            <p>Send a fetch request to <strong>http://localhost:4321/tracks/track%20name</strong></p>
-            <p>example cURL request for Michael Jackson's 'Rock With You':</p>
+            <p>This will return a list of 10 items that most closely match your search.</p>
+            <p>Send a fetch request to <strong>http://localhost:4321/tracks/:trackName</strong></p>
+            <p>Example cURL request for Michael Jackson's "Rock With You":</p>
             <p><strong>curl 'http://localhost:4321/tracks/rock%20with%20you'</strong></p>
         </div>
         <div>
             <h3>To search for an artist</h3>
-            <p>Send a fetch request to <strong>http://localhost:4321/artists/artist%20name</strong></p>
+            <p>This will return a list of 10 items that most closely match your search.</p>
+            <p>Send a fetch request to <strong>http://localhost:4321/artists/:artistName</strong></p>
+            <p>Example cURL request for "Little Dragon":</p>
+            <p><strong>curl 'http://localhost:4321/artists/Little%20Dragon'</strong></p>
         </div>
         <div>
             <h3>To search for an artist's top ten tracks</h3>
-            <p>Send a fetch request to <strong>http://localhost:4321/artistID/top-tracks</strong></p>
+            <p>This fetch requires you to know the specific artist's Spotify ID, which you can get from the previous request (/artists/:artistName).</p>
+            <p>Send a fetch request to <strong>http://localhost:4321/artists/:artistID/top-tracks</strong></p>
+            <p>Example cURL request for Little Dragon's top ten tracks in Spotify:</p>
+            <p><strong>curl 'http://localhost:4321/6Tyzp9KzpiZ04DABQoedps/top-tracks'</strong></p>
         </div>
     </section>
 </body>

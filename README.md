@@ -42,25 +42,35 @@ Please note that your searches must be UTF-8 encoded.
 
 You can use the ECMAScript `encodeURI()` built-in object method to encode your search
 
-( i.e. `encodeURI("Little Dragon")` => "Little%20Dragon", `encodeURI("Rock With You")` => "Rock%20With%20You" ).
+i.e. `encodeURI("Little Dragon")` => "Little%20Dragon", `encodeURI("Rock With You")` => "Rock%20With%20You"
 
 I set my port in my `.env` file as `PORT=4321`, so I will be using `http://localhost:4321` as my base URL for all my fetch requests.
 
 
 ### To search for a track
 
-Send a fetch request to `http://localhost:4321/tracks/track%20name`
+This will return a list of 10 items that most closely match your search.
+Send a fetch request to `http://localhost:4321/tracks/:trackName`
 
-Example cURL request for Michael Jackson's 'Rock With You':
+Example cURL request for Michael Jackson's "Rock With You":
 : `curl 'http://localhost:4321/tracks/rock%20with%20you'`
 
 ### To search for an artist
 
-Send a fetch request to `http://localhost:4321/artists/artist%20name`
+This will return a list of 10 items that most closely match your search.
+Send a fetch request to `http://localhost:4321/artists/:artistName`
+
+Example cURL request for "Little Dragon":
+: curl 'http://localhost:4321/artists/Little%20Dragon'
 
 
 
 ### To search for an artist's top ten tracks
 
+This fetch requires you to know the specific artist's Spotify ID, which you can get from the previous request (/artists/:artistName).
+
 Send a fetch request to `http://localhost:4321/artistID/top-tracks`
+
+Example cURL request for Little Dragon's top ten tracks in Spotify:
+: curl 'http://localhost:4321/6Tyzp9KzpiZ04DABQoedps/top-tracks'
 
