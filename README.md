@@ -52,7 +52,7 @@ I set my port in my `.env` file as `PORT=4321`, so I will be using `http://local
 This will return a list of 10 items that most closely match your search.
 Send a fetch request to `http://localhost:4321/tracks/:trackName`
 
-Example cURL request for Michael Jackson's "Rock With You":
+Example cURL request for Michael Jackson's "Rock With You"
 : `curl 'http://localhost:4321/tracks/rock%20with%20you'`
 
 ### To search for an artist
@@ -60,8 +60,8 @@ Example cURL request for Michael Jackson's "Rock With You":
 This will return a list of 10 items that most closely match your search.
 Send a fetch request to `http://localhost:4321/artists/:artistName`
 
-Example cURL request for "Little Dragon":
-: curl 'http://localhost:4321/artists/Little%20Dragon'
+Example cURL request for "Little Dragon"
+: `curl 'http://localhost:4321/artists/Little%20Dragon'`
 
 
 
@@ -71,6 +71,6 @@ This fetch requires you to know the specific artist's Spotify ID, which you can 
 
 Send a fetch request to `http://localhost:4321/artistID/top-tracks`
 
-Example cURL request for Little Dragon's top ten tracks in Spotify:
-: curl 'http://localhost:4321/6Tyzp9KzpiZ04DABQoedps/top-tracks'
+Example cURL request for Little Dragon's top ten tracks in Spotify
+: `curl 'http://localhost:4321/6Tyzp9KzpiZ04DABQoedps/top-tracks'`
 
