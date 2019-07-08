@@ -50,9 +50,9 @@ I set my port in my `.env` file as `PORT=4321`, so I will be using `http://local
 ### To search for a track
 
 Send a fetch request to `http://localhost:4321/tracks/track%20name`
-Example cURL request for Michael Jackson's 'Rock With You': 
 
-`curl 'http://localhost:4321/tracks/rock%20with%20you'`
+Example cURL request for Michael Jackson's 'Rock With You':
+: `curl 'http://localhost:4321/tracks/rock%20with%20you'`
 
 ### To search for an artist
 
