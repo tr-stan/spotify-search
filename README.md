@@ -9,7 +9,7 @@ You can use this API to search for tracks, artists, and artists' top 10 songs vi
 
 You can clone this repository to your local device by opening up your terminal and typing the commands:
 
-*   `mkdir spotify-search && cd spotify-search``
+*   `mkdir spotify-search && cd spotify-search`
 *   `npm install`
 *   `git clone https://github.com/tr-stan/spotify-search.git`
 
@@ -50,8 +50,9 @@ I set my port in my `.env` file as `PORT=4321`, so I will be using `http://local
 ### To search for a track
 
 Send a fetch request to `http://localhost:4321/tracks/track%20name`
-Example cURL request:
->
+Example cURL request for Michael Jackson's 'Rock With You': 
+
+`curl 'http://localhost:4321/tracks/rock%20with%20you'`
 
 ### To search for an artist
 
