@@ -53,6 +53,7 @@ This will return a list of 10 items that most closely match your search.
 Send a fetch request to `http://localhost:4321/tracks/:trackName`
 
 Example cURL request for Michael Jackson's "Rock With You"
+
 : `curl 'http://localhost:4321/tracks/rock%20with%20you'`
 
 ### To search for an artist
@@ -61,6 +62,7 @@ This will return a list of 10 items that most closely match your search.
 Send a fetch request to `http://localhost:4321/artists/:artistName`
 
 Example cURL request for "Little Dragon"
+
 : `curl 'http://localhost:4321/artists/Little%20Dragon'`
 
 
@@ -72,5 +74,6 @@ This fetch requires you to know the specific artist's Spotify ID, which you can 
 Send a fetch request to `http://localhost:4321/artistID/top-tracks`
 
 Example cURL request for Little Dragon's top ten tracks in Spotify
+
 : `curl 'http://localhost:4321/6Tyzp9KzpiZ04DABQoedps/top-tracks'`
 
