@@ -1,9 +1,11 @@
 require('dotenv').config();
-const app = require('express')();
+const express= require('express');
 const path = require('path');
 const axios = require('axios');
 const cors = require('cors');
 const base64 = require('base-64');
+const app = express();
+const router = express.Router();
 const LimitingMiddleware = require('limiting-middleware');
 
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -18,6 +20,9 @@ const REFRESH_RATE = 59000 * 60; // 59 minutes
 app.use(cors());
 // middleware for rate limiting with each request, courtesy of Daniel Katz
 app.use(new LimitingMiddleware().limitByIp());
+
+// should add middleware below to refresh token before any request if it's not valid 
+
 
 let accessToken = ''
 
@@ -69,6 +74,7 @@ app.get('/artists/:name', (request, response, next) => {
 	})
 	.catch(error => {
 		console.log("There was an error fetching the artists", error);
+
 	})
 })
 
