@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 9000;
 
 const AUTHORIZATION_HEADER = base64.encode(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const BASE_URL = 'https://api.spotify.com/v1/';
-const REFRESH_RATE = 57000 * 60; // 57 minutes
+const REFRESH_RATE = 50000 * 60; // 50 minutes
 
 // use cors middleware to allow requests from other servers/sites e.g. frontend application
 app.use(cors());
